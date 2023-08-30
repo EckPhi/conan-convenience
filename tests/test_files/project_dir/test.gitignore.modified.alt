@@ -1,0 +1,10 @@
+# header
+Lorem
+
+# This section is managed by conan-convenience
+test-file.txt
+test_file.txt
+test.txt
+
+test-dir/*
+Ipsum
