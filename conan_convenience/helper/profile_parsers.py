@@ -26,11 +26,13 @@ class ProfileHelper:
         buildTypeIdx = (
             params.index("debug")
             if "debug" in params
-            else params.index(
-                "release",
+            else (
+                params.index(
+                    "release",
+                )
+                if "release" in params
+                else len(params)
             )
-            if "release" in params
-            else len(params)
         )
         res = {"task": "build"}
 
@@ -62,9 +64,11 @@ class ProfileHelper:
         # [(ide_prefix)/cmake]-[task]-[buildOS]-[hostOS]-[board]-[flavour]-[buildType]
         params = self.get_profile_params(profile)
         build_directory = [
-            config.ValidatedConfig.ide_prefix
-            if config.ValidatedConfig.ide_build
-            else "cmake",
+            (
+                config.ValidatedConfig.ide_prefix
+                if config.ValidatedConfig.ide_build
+                else "cmake"
+            ),
             params.get(
                 "task",
             ),
